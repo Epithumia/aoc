@@ -14,7 +14,7 @@ def prepare(report: List[int]) -> List[int]:
     return prepared
 
 
-def check(prepared: List[int]) -> bool:
+def check(prepared: List[int]) -> int:
     errors = 0
     for v in prepared:
         if not (0 < v < 4):
