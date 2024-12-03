@@ -2,7 +2,7 @@ import re
 
 with open("2024/input/day03") as f:
     data = f.read().splitlines()
-    data = "".join(data)  # F you, carriage return
+    data = "".join(data)  # F you, newline
 
 
 mul = re.findall(r"mul\((\d+?),(\d+?)\)", data)
