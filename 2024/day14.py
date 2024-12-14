@@ -48,13 +48,20 @@ def flood_fill(picture):
 
 for i in range(10000):
     final = defaultdict(lambda: 0)
+    check = defaultdict(lambda: 0)
     for px, py, vx, vy in robots:
         rx = (px + i * vx) % w
         ry = (py + i * vy) % h
         final[(rx, ry)] = 1
+        check[(rx, ry)] += 1
 
-    flood_fill(final)
-    # The right image will have more empty space because the tree is framed in a square
-    if sum([final[(x, y)] for x in range(w) for y in range(h)]) < w * h - 50:
+    if all([check[(x, y)] == final[(x, y)] for x,y in final]):
         print("Part 2:", i)
         break
+
+    # Original idea below:
+    # flood_fill(final)
+    # # The right image will have more empty space because the tree is framed in a square
+    # if sum([final[(x, y)] for x in range(w) for y in range(h)]) < w * h - 50:
+    #     print("Part 2:", i)
+    #     break
