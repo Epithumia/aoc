@@ -19,7 +19,7 @@ def move(a, b):
     return inf
 
 
-def dijkstra(graph, source, destination) -> int:
+def dijkstra(graph, source, destination):
     seen = defaultdict(lambda: False)
     sac = []
     heapq.heappush(sac, (0, source, None))
