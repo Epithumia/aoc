@@ -21,10 +21,10 @@ def move(a, b):
 
 def dijkstra(graph, source, destination):
     seen = defaultdict(lambda: False)
-    sac = []
-    heapq.heappush(sac, (0, source, None))
-    while len(sac) > 0:
-        distance, current, parent = heapq.heappop(sac)
+    bag = []
+    heapq.heappush(bag, (0, source, None))
+    while len(bag) > 0:
+        distance, current, parent = heapq.heappop(bag)
         if current in destination:
             seen[current] = parent
             return distance, seen
@@ -42,7 +42,7 @@ def dijkstra(graph, source, destination):
             for neighbor in neighbors:
                 cost = move(current, neighbor)
                 heapq.heappush(
-                    sac,
+                    bag,
                     (cost + distance, neighbor, current),
                 )
     return inf, None
