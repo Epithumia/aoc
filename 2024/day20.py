@@ -1,5 +1,4 @@
 from collections import defaultdict
-from tqdm import tqdm
 
 
 def manhattan_distance(p1, p2):
