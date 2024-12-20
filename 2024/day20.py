@@ -33,16 +33,15 @@ while current != end:
             break
 
 part1 = 0
-cutoff1 = 99
 part2 = 0
-cutoff2 = 99
+cutoff = 99
 
-for i in range(len(original_path) - 2):
-    for j in range(i + 2, len(original_path)):
+for i in range(len(original_path) - 4):
+    for j in range(i + 4, len(original_path)):
         cheat = manhattan_distance(original_path[i], original_path[j])
-        if 2 <= cheat <= 20 and j - i - cheat > cutoff2:
+        if 2 <= cheat <= 20 and j - i - cheat > cutoff:
             part2 += 1
-            if cheat == 2 and j - i - cheat > cutoff1:
+            if cheat == 2:
                 part1 += 1
 
 print("Part 1:", part1)
