@@ -36,8 +36,8 @@ part1 = 0
 part2 = 0
 cutoff = 99
 
-for i in range(len(original_path) - 4):
-    for j in range(i + 4, len(original_path)):
+for i in range(len(original_path) - (cutoff + 3)):
+    for j in range(i + (cutoff + 3), len(original_path)):
         cheat = manhattan_distance(original_path[i], original_path[j])
         if 2 <= cheat <= 20 and j - i - cheat > cutoff:
             part2 += 1
