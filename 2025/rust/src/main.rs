@@ -1,6 +1,7 @@
 mod aoc2025;
 
 use crate::aoc2025::day01::day01;
+use crate::aoc2025::day02::day02;
 
 use rdcl_aoc_helpers::args::get_args;
 
@@ -11,8 +12,8 @@ fn main() {
 
     match day {
         1 => day01(&path.to_string()),
+        2 => day02(&path.to_string()),
         /*
-        2 => day2(&path.to_string()),
         3 => day3(&path.to_string()),
         4 => day4(&path.to_string()),
         5 => day5(&path.to_string()),
