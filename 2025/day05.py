@@ -22,29 +22,13 @@ for a, b in intervals:
                 valid_id_range.remove((i1, i2))
                 valid_id_range.append((i1, b))
             break
-        if i1 <= b <= i2:
-            if a < i1:
-                valid_id_range.remove((i1, i2))
-                valid_id_range.append((a, i2))
-            break
-        if a < i1 and i2 < b:
-            valid_id_range.remove((i1, i2))
-            valid_id_range.append((a, b))
-            break
     else:
         valid_id_range.append((a, b))
 
-partie1 = 0
-
-for i in ids:
-    if any(a <= i <= b for a, b in valid_id_range):
-        partie1 += 1
+partie1 = sum(any(a <= i <= b for a, b in valid_id_range) for i in ids)
 
 print("Partie 1:", partie1)
 
-partie2 = 0
-
-for a, b in valid_id_range:
-    partie2 += b - a + 1
+partie2 = sum(b - a + 1 for a, b in valid_id_range)
 
 print("Partie 2:", partie2)
