@@ -5,6 +5,7 @@ use crate::aoc2025::day02::day02;
 use crate::aoc2025::day03::day03;
 use crate::aoc2025::day04::day04;
 use crate::aoc2025::day05::day05;
+use crate::aoc2025::day06::day06;
 
 use rdcl_aoc_helpers::args::get_args;
 
@@ -19,8 +20,8 @@ fn main() {
         3 => day03(&path.to_string()),
         4 => day04(&path.to_string()),
         5 => day05(&path.to_string()),
-        /*
         6 => day06(&path.to_string()),
+        /*
         7 => day07(&path.to_string()),
         8 => day08(&path.to_string()),
         9 => day09(&path.to_string()),
