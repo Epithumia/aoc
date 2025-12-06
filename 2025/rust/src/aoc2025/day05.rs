@@ -5,7 +5,7 @@ pub fn day05(path: &String) {
     let data: Vec<String> = File::open(path).read_lines::<String>(1).collect();
     let mut intervals: Vec<(u64, u64)> = Vec::new();
     let mut merged_intervals: Vec<(u64, u64)> = Vec::new();
-    let mut ids:Vec<u64> = Vec::new();
+    let mut ids: Vec<u64> = Vec::new();
 
     for line in data {
         if line.contains('-') {
@@ -14,7 +14,7 @@ pub fn day05(path: &String) {
         } else if line.len() > 0 {
             ids.push(line.parse::<u64>().unwrap());
         }
-    } 
+    }
 
     intervals.sort_by(|a, b| a.0.cmp(&b.0));
     merged_intervals.push(intervals[0]);
@@ -33,7 +33,10 @@ pub fn day05(path: &String) {
         }
     }
 
-    let partie1: u64 = ids.iter().filter(|x| merged_intervals.iter().any(|y| y.0 <= **x && y.1 >= **x)).count() as u64;
+    let partie1: u64 = ids
+        .iter()
+        .filter(|x| merged_intervals.iter().any(|y| y.0 <= **x && y.1 >= **x))
+        .count() as u64;
     println!("Partie 1: {}", partie1);
     let partie2: u64 = merged_intervals.iter().map(|x| x.1 - x.0 + 1).sum();
 
