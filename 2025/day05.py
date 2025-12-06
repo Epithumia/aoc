@@ -16,7 +16,7 @@ intervals.sort()
 valid_id_range = []
 
 for a, b in intervals:
-    for i1, i2 in valid_id_range:
+    for i1, i2 in valid_id_range[-1:]:
         if i1 <= a <= i2:
             if i2 < b:
                 valid_id_range.remove((i1, i2))
