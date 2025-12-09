@@ -34,6 +34,7 @@ for p1, p2 in combinations(points, 2):
         Point(p1[0], p2[1]),
         Point(p2),
         Point(p2[0], p1[1]),
+        Point(p1),
     ]
     rect = LineString(rect_points)
     if area.contains(rect):
