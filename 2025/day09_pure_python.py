@@ -44,19 +44,19 @@ with open("2025/input/day09") as f:
         x = tuple(int(x) for x in line.split(","))
         points.append(x)
 
+pre_calc_surfaces = []
+
 for p1, p2 in combinations(points, 2):
     surface = (abs(p1[0] - p2[0]) + 1) * (abs(p1[1] - p2[1]) + 1)
-    if surface > best:
-        best = surface
+    pre_calc_surfaces.append((surface, p1, p2))
 
+pre_calc_surfaces.sort(reverse=True)
 
-print(f"Partie 1 : {best}")
+print(f"Partie 1 : {pre_calc_surfaces[0][0]}")
 
 best = 0
 
-for p1, p2 in combinations(points, 2):
-
-    surface = (abs(p1[0] - p2[0]) + 1) * (abs(p1[1] - p2[1]) + 1)
+for surface, p1, p2 in pre_calc_surfaces:
     if surface <= best:
         continue
     potential = True
@@ -69,18 +69,16 @@ for p1, p2 in combinations(points, 2):
     ]
 
     for edge in edges:
-        intersections = 0
-        p_edge1 = min(edge)
-        p_edge2 = max(edge)
-        if p_edge1[0] != p_edge2[0]:
-            p_edge1 = (p_edge1[0] + 1, p_edge1[1])
-            p_edge2 = (p_edge2[0] - 1, p_edge2[1])
-        else:
-            p_edge1 = (p_edge1[0], p_edge1[1] + 1)
-            p_edge2 = (p_edge2[0], p_edge2[1] - 1)
         if potential:
-            i = 0
-            inter = 0
+            intersections = 0
+            p_edge1 = min(edge)
+            p_edge2 = max(edge)
+            if p_edge1[0] != p_edge2[0]:
+                p_edge1 = (p_edge1[0] + 1, p_edge1[1])
+                p_edge2 = (p_edge2[0] - 1, p_edge2[1])
+            else:
+                p_edge1 = (p_edge1[0], p_edge1[1] + 1)
+                p_edge2 = (p_edge2[0], p_edge2[1] - 1)
             intersections += sum(
                 [
                     1
@@ -98,5 +96,6 @@ for p1, p2 in combinations(points, 2):
 
     if potential:
         best = surface
+        break
 
 print(f"Partie 2 : {best}")

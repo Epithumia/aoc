@@ -15,39 +15,35 @@ pub fn day09(path: &String) {
         })
         .collect();
 
-    let mut best = 0;
+    let mut pre_calc_surfaces: Vec<(u64, Point, Point)> = Vec::new();
 
     for i in 0..points.len() - 1 {
         for j in i + 1..points.len() {
             let distance: u64 = (((points[i].x() - points[j].x()).abs() + 1.0)
                 * ((points[i].y() - points[j].y()).abs() + 1.0))
                 as u64;
-            if distance > best {
-                best = distance;
-            }
+            pre_calc_surfaces.push((distance, points[i], points[j]));
         }
     }
 
-    println!("Partie 1: {}", best);
+    pre_calc_surfaces.sort_by(|a, b| b.0.cmp(&a.0));
+
+    println!("Partie 1: {}", pre_calc_surfaces[0].0);
 
     let area: Polygon = Polygon::new(LineString::from(points.clone()), vec![]);
 
-    best = 0;
+    let mut best = 0;
 
-    for i in 0..points.len() - 1 {
-        for j in i + 1..points.len() {
-            let distance: u64 = (((points[i].x() - points[j].x()).abs() + 1.0)
-                * ((points[i].y() - points[j].y()).abs() + 1.0))
-                as u64;
-            if distance > best {
-                let p1: Point = points[i];
-                let p2: Point = Point::new(points[i].x(), points[j].y());
-                let p3: Point = points[j];
-                let p4: Point = Point::new(points[j].x(), points[i].y());
-                let edges: LineString = LineString::from(vec![p1, p2, p3, p4, p1]);
-                if area.contains(&edges) {
-                    best = distance;
-                }
+    for p in pre_calc_surfaces {
+        if p.0 > best {
+            let p1 = p.1;
+            let p3 = p.2;
+            let p2 = Point::new(p1.x(), p3.y());
+            let p4 = Point::new(p3.x(), p1.y());
+            let edges: LineString = LineString::from(vec![p1, p2, p3, p4, p1]);
+            if area.contains(&edges) {
+                best = p.0;
+                break;
             }
         }
     }

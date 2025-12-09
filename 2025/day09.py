@@ -13,20 +13,21 @@ with open("2025/input/day09") as f:
         x = tuple(int(x) for x in line.split(","))
         points.append(x)
 
+pre_calc_surfaces = []
+
 for p1, p2 in combinations(points, 2):
     surface = (abs(p1[0] - p2[0]) + 1) * (abs(p1[1] - p2[1]) + 1)
-    if surface > best:
-        best = surface
+    pre_calc_surfaces.append((surface, p1, p2))
 
+pre_calc_surfaces.sort(reverse=True)
 
-print(f"Partie 1 : {best}")
+print(f"Partie 1 : {pre_calc_surfaces[0][0]}")
 
 area = Polygon([Point(x) for x in points])
 prepare(area)
 best = 0
 
-for p1, p2 in combinations(points, 2):
-    surface = (abs(p1[0] - p2[0]) + 1) * (abs(p1[1] - p2[1]) + 1)
+for surface, p1, p2 in pre_calc_surfaces:
     if surface <= best:
         continue
     rect_points = [
@@ -39,5 +40,6 @@ for p1, p2 in combinations(points, 2):
     rect = LineString(rect_points)
     if area.contains(rect):
         best = surface
+        break
 
 print(f"Partie 2 : {best}")
