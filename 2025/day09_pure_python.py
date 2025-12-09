@@ -1,4 +1,5 @@
 from itertools import combinations
+from math import sqrt
 
 pairs = []
 points = []
@@ -13,6 +14,14 @@ def intersect(A, B, C, D):
     return ccw(A, C, D) != ccw(B, C, D) and ccw(A, B, C) != ccw(A, B, D)
 
 
+def distance(a, b):
+    return sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
+
+
+def is_between(a, c, b):
+    return distance(a, c) + distance(c, b) == distance(a, b)
+
+
 def line_segment_intersection(polygon, point):
 
     inside = False
@@ -21,7 +30,8 @@ def line_segment_intersection(polygon, point):
     for i in range(num_vertices):
         x1, y1 = polygon[i]
         x2, y2 = polygon[(i + 1) % num_vertices]
-
+        if is_between((x1, y1), point, (x2, y2)):
+            return True
         if (y1 > y) != (y2 > y) and x < x1 + ((y - y1) * (x2 - x1) / (y2 - y1)):
             inside = not inside
     return inside
