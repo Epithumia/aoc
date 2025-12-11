@@ -3,7 +3,6 @@ from collections import deque
 
 def count_paths(n, edges, source, destination):
 
-    # Create adjacency list (1-based indexing)
     graph = [[] for _ in range(n + 1)]
     in_degree = [0] * (n + 1)
 
